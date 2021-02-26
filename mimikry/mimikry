@@ -1,7 +1,27 @@
 #!/bin/bash
 
+SCRIPTNAME=$(basename $0)
+
 DIRECTORYSTARTINGPOINT=$1
 FILENAMEPATTERN=$2
 DIRECTORYDESTINATION=$3
+
+if [ "${DIRECTORYSTARTINGPOINT}" == "" ]
+then
+        echo "${SCRIPTNAME}: cannot find input parameter \"[starting-point...]\"" 1>&2
+        exit 1
+fi
+
+if [ "${FILENAMEPATTERN}" == "" ]
+then
+        echo "${SCRIPTNAME}: cannot find input parameter \"pattern\"" 1>&2
+        exit 1
+fi
+
+if [ "${DIRECTORYDESTINATION}" == "" ]
+then
+        echo "${SCRIPTNAME}: cannot find input parameter \"DIRECTORY\"" 1>&2
+        exit 1
+fi
 
 find "${DIRECTORYSTARTINGPOINT}" -name "${FILENAMEPATTERN}" -exec cp -t "${DIRECTORYDESTINATION}" --parents \{\} \;
