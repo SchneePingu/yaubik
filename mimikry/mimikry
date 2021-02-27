@@ -24,4 +24,16 @@ then
         exit 1
 fi
 
+if [ ! -d "${DIRECTORYSTARTINGPOINT}" ]
+then
+        echo "${SCRIPTNAME}: cannot find directory \"${DIRECTORYSTARTINGPOINT}\"" 1>&2
+        exit 1
+fi
+
+if [ ! -d "${DIRECTORYDESTINATION}" ]
+then
+        echo "${SCRIPTNAME}: cannot find directory \"${DIRECTORYDESTINATION}\"" 1>&2
+        exit 1
+fi
+
 find "${DIRECTORYSTARTINGPOINT}" -name "${FILENAMEPATTERN}" -exec cp -t "${DIRECTORYDESTINATION}" --parents \{\} \;
